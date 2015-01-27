@@ -3,67 +3,58 @@ package com.kingAm.Stalker;
  * Author# Ambuj Mishra
  * Date# 25 JAN 2015
   */
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.graphics.g2d.Batch;
+
+/*	This class will contain main logic of game
+StalkingGame extends Table, this is a special type of Actor that has a funky setClip(true) function,
+it means that anything outside the bounds of the TrafficGame won't be drawn. 
+Remember that we don't allow the aspect ratio to be stretched, 
+clipping means we won't have actors spilling out over our nice black letterboxing bars. 
+I think this is probably abusing tables, it's no doubt not what they were really meant for, 
+but I think it's a great little hack and am more than happy with the results!
+*/	
 
 
-public class StalkerGame extends Game{
+//Learn how to add action to Actions to actors
+public class StalkingGame extends Table{
 	
-/*	final width and height constants that will be used to specify 
-	the target resolution of the game. We'll later use these constants
-	to set the size of our game stage. Note that these values aren't physical pixel dimensions,
-	they are an abstract idea of the size of our play area.
-	Our LibGDX Scene2D Stage will be stretched to fit the players device as best possible, 
-	which means our game will display nicely on devices with 320x240px screens, 1920x1080px screens, 
-	and anything in between!*/
-	public final static int WIDTH = 800;
-	public final static int HEIGHT = 480;
-
-	public Texture skr;			//Texture for stalker
-	public Texture tgt;			//Texture for target
+	StalkerGame sg;
+	public Stalker sr;
+	private Target tr;
 	
-	StalknigScreen SGS;			// StalkingScreen
-	
-	// Below are the constants which will be multiplied to control animation speed of characters.
-	  private int StSpeed;		// Stalker's speed, It depends on User's touch time. User touch time*StSpeed will decide it.
-	  private int TgSpeed;		// Target's speed, It will be dynamic, AI of game will decide it.
-	
-	  
-	  public int getStSpeed()
-	  {
-		  return StSpeed;
-	  }
-	  public int getTgSpeed()
-	  {
-		  return TgSpeed;
-	  }
+	public StalkingGame(StalkerGame sg)
+	{
+		this.sg=sg;
+		//setBounds(0, 0, sg.WIDTH, sg.HEIGHT);
+		setBounds(0, 0, 800, 480);
+		setClip(true);
+		//tr = new Target(this);    //If you want to use any parameter or method of this class then use this initialization
+		tr = new Target(sg);
+		addActor(tr);
+		//sr = new Stalker(this);    //If you want to use any parameter or method of this class then use this initialization
+		sr = new Stalker(sg);		// it will pass through main game class instance to load texture in actor classes
+		addActor(sr);
+	}
 	@Override
-	public void create() {
-	//Enhancement: Use Texture Atlas to bind and load images
-		//initializing texture
-		skr=new Texture(Gdx.files.internal("stalker1.png"));	
-      	tgt=new Texture(Gdx.files.internal("target1.png"));
-      	
-      	//initializing screen
-      	SGS= new StalknigScreen(this);	
-      	
-      	//set animation speed
-      	StSpeed=300;
-      	TgSpeed=300;
-      	setScreen(SGS);
+	public void act(float delta) {
+		//Investigate: Reason for calling super.act()
+		//Found: super.act(delta) will call act method of it's Actors i.e. Target and Stalker
+		super.act(delta);						// very Important :)
+		//Write logic here
+	}
+	//Investigate: why?...FYI, u can override with Batch parameter instead of SpriteBatch...why?
+	//Found: Stage.draw() will call draw method of it's Actor i.e. StalkingGame class in our case. 
+	//But to call draw method of this class's (Table) Actor (Target and Stalker)
+	//You have to call super.draw(Batch b, float f) method again
+	@Override					
+	public void draw(Batch batch, float parentAlpha) {
+		//System.out.println("here");
+		batch.setColor(Color.GRAY);		//Interesting: Its is changing background color of your actors
+		super.draw(batch, parentAlpha);    //Important :(
 	}
 
-	public void render() 
-	 	{
-	        super.render(); //important!
-	    }
-	 
-	@Override
-	public void dispose() {
-		skr.dispose();
-		tgt.dispose();
-		SGS.dispose();
-	}
 
 }
