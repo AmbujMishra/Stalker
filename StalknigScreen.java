@@ -7,15 +7,16 @@ package com.kingAm.Stalker;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
+//import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 //import com.badlogic.gdx.input.GestureDetector;
 //import com.badlogic.gdx.input.GestureDetector.GestureListener;
 //import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.graphics.GL20;
 
-public class StalknigScreen implements Screen,InputProcessor/*, GestureListener*/{
+public class StalknigScreen implements Screen/*,InputProcessor, GestureListener*/{
 	
 	StalkerGame sg;		//u can remove this instance if it is not being used anywhere
 /*	This class will contain main logic of game
@@ -35,7 +36,7 @@ public class StalknigScreen implements Screen,InputProcessor/*, GestureListener*
 	//public boolean tUp=false;
 	public StalknigScreen(StalkerGame sg) {
 		this.sg=sg;
-		stage = new Stage();
+		stage = new Stage(new StretchViewport(sg.WIDTH, sg.HEIGHT));
 		Sking = new StalkingGame(sg); 
 		stage.addActor(Sking);
 		
@@ -53,13 +54,13 @@ public class StalknigScreen implements Screen,InputProcessor/*, GestureListener*
 			//tDown=true;
 		if(Gdx.input.justTouched() && !Sking.sr.getMoving())
 		{
-			Gdx.input.setInputProcessor(null);
+			//Gdx.input.setInputProcessor(null);
 			Sking.sr.setMoving(true);
 		}
-		if(!Sking.sr.getMoving())
+		/*if(!Sking.sr.getMoving())
 		{
-			Gdx.input.setInputProcessor(stage);
-		}
+			//Gdx.input.setInputProcessor(stage);
+		}*/
 		
 	}
 
@@ -69,13 +70,15 @@ public class StalknigScreen implements Screen,InputProcessor/*, GestureListener*
 
 	@Override
 	public void show() {
+		//stage.setViewport(new StretchViewport());
 		//Gdx.input.setInputProcessor(stage);
+		//Gdx.input.setInputProcessor(null);
 		
 	}
 
 	@Override
 	public void hide() {
-		Gdx.input.setInputProcessor(null);
+		//Gdx.input.setInputProcessor(null);			//it won't affect anything as inputProcessor is not implemented
 		
 	}
 	@Override public void resume() {}
@@ -96,7 +99,7 @@ public class StalknigScreen implements Screen,InputProcessor/*, GestureListener*
 	@Override public boolean zoom(float initialDistance, float distance) {return false;}
 	@Override public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {return false;}
 	@Override public boolean panStop(float x, float y, int pointer, int button) {return false;}
-*/
+*//*
 	@Override
 	public boolean keyDown(int keycode) {
 		// TODO Auto-generated method stub
@@ -145,6 +148,6 @@ public class StalknigScreen implements Screen,InputProcessor/*, GestureListener*
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+*/
 
 }
