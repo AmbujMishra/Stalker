@@ -29,6 +29,7 @@ public class Stalker extends Actor {
 	@Override
 	public void act(float delta){
 		System.out.println("ACTstkr");
+		setY(getY()+sg.getStSpeed()*delta);
 		super.act(delta);				//Investigate: Why are we using super.act here? I think we can skip it.
 		updateBounds();
 	}
