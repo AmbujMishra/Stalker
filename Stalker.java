@@ -18,7 +18,8 @@ public class Stalker extends Actor {
 	//private StalkingGame sg;    u can uncomment it if you are using any method or parameter of this class
 	private Rectangle bounds = new Rectangle();
 	private boolean moving=false;
-	private float nY;
+	private float nY;		// holding previous Y position of stalker
+	private float sM=30;	// Movement of stalker in one single touch	
 		
 	public Stalker(StalkerGame sg) {
 		this.sg=sg;
@@ -26,7 +27,7 @@ public class Stalker extends Actor {
 		setHeight(64);
 		setPosition(Gdx.graphics.getWidth()/2- getWidth()/2,0 );		// Initial position of stalker, set accordingly
 		setColor(Color.RED);	//Experiment: on this line
-		nY=getY()+30;
+		nY=getY()+sM;
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class Stalker extends Actor {
 		}
 		if(getY()> nY)
 			{
-			nY=getY()+30;
+			nY=getY()+sM;
 			setMoving(false);
 			}
 	}
