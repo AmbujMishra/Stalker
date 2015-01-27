@@ -22,7 +22,7 @@ but I think it's a great little hack and am more than happy with the results!
 public class StalkingGame extends Table{
 	
 	StalkerGame sg;
-	private Stalker sr;
+	public Stalker sr;
 	private Target tr;
 	
 	public StalkingGame(StalkerGame sg)
@@ -51,7 +51,7 @@ public class StalkingGame extends Table{
 	//You have to call super.draw(Batch b, float f) method again
 	@Override					
 	public void draw(Batch batch, float parentAlpha) {
-		System.out.println("here");
+		//System.out.println("here");
 		batch.setColor(Color.DARK_GRAY);		//Interesting: Its is changing background color of your actors
 		super.draw(batch, parentAlpha);    //Important :(
 	}
