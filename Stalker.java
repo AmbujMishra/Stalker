@@ -17,6 +17,8 @@ public class Stalker extends Actor {
 	StalkerGame sg;
 	//private StalkingGame sg;    u can uncomment it if you are using any method or parameter of this class
 	private Rectangle bounds = new Rectangle();
+	private boolean moving=false;
+	private float nY;
 		
 	public Stalker(StalkerGame sg) {
 		this.sg=sg;
@@ -24,14 +26,25 @@ public class Stalker extends Actor {
 		setHeight(64);
 		setPosition(Gdx.graphics.getWidth()/2- getWidth()/2,0 );		// Initial position of stalker, set accordingly
 		setColor(Color.RED);	//Experiment: on this line
+		nY=getY()+30;
 	}
 
 	@Override
 	public void act(float delta){
-		System.out.println("ACTstkr");
-		setY(getY()+sg.getStSpeed()*delta);
-		super.act(delta);				//Investigate: Why are we using super.act here? I think we can skip it.
-		updateBounds();
+		System.out.println("StalkerAct");
+		//setY(getY()+sg.getStSpeed()*delta);
+		//super.act(delta);				//Investigate: Why are we using super.act here? I think we can skip it.
+		updateBounds();					//We are not doing anything with Actor's bound, so remove it.
+		
+		if(getMoving() && getY()<= nY)
+		{
+			setY(getY()+sg.getStSpeed()*delta);
+		}
+		if(getY()> nY)
+			{
+			nY=getY()+30;
+			setMoving(false);
+			}
 	}
 	
 	private void updateBounds() {
@@ -41,6 +54,15 @@ public class Stalker extends Actor {
 	
 	public Rectangle getBounds() {
 		return bounds;
+	}
+	public boolean getMoving()
+	{
+		return moving;
+	}
+	
+	public void setMoving(boolean m)
+	{
+		moving=m;
 	}
 	
 	//Refer below methods to add action to this actor
