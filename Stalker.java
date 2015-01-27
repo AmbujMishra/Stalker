@@ -26,7 +26,7 @@ public class Stalker extends Actor {
 		setWidth(64);
 		setHeight(64);
 		//setPosition(Gdx.graphics.getWidth()/2- getWidth()/2,0 );		// Initial position of stalker, set accordingly
-		setPosition(sg.WIDTH/2-getWidth()/2, sg.HEIGHT/2-getHeight()/2);	//Independent of pixel
+		setPosition(sg.WIDTH/2- getWidth()/2,0 );	//Independent of pixel
 		setColor(Color.RED);	//Experiment: on this line
 		nY=getY()+sM;
 	}
