@@ -23,8 +23,10 @@ public class Stalker extends Actor {
 		
 	public Stalker(StalkerGame sg) {
 		this.sg=sg;
-		setWidth(64);
-		setHeight(64);
+		//setWidth(64);	//It's in pixels. correct it
+		setWidth(64f*((float)Gdx.graphics.getWidth()/sg.WIDTH));	//Done
+		//setHeight(64);	//It's in pixel. correct it
+		setHeight(64f*((float)Gdx.graphics.getHeight()/sg.HEIGHT));	//Done
 		//setPosition(Gdx.graphics.getWidth()/2- getWidth()/2,0 );		// Initial position of stalker, set accordingly
 		setPosition(sg.WIDTH/2- getWidth()/2,0 );	//Independent of pixel
 		setColor(Color.RED);	//Experiment: on this line
