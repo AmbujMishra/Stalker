@@ -19,8 +19,10 @@ public class Target extends Actor{
 	
 	public Target(StalkerGame sg) {
 		this.sg=sg;
-		setWidth(64);
-		setHeight(64);
+	         //setWidth(64);	//It's in pixels. correct it
+		setWidth(64f*((float)Gdx.graphics.getWidth()/sg.WIDTH));	//Done
+		//setHeight(64);	//It's in pixel. correct it
+		setHeight(64f*((float)Gdx.graphics.getHeight()/sg.HEIGHT));	//Done
 		//setPosition(Gdx.graphics.getWidth()/2-getWidth()/2, Gdx.graphics.getHeight()/2-getHeight()/2);		//Starting position of Actor, set accordingly
 		setPosition(sg.WIDTH/2-getWidth()/2, sg.HEIGHT/2-getHeight()/2);	//Independent of pixel
 	}
