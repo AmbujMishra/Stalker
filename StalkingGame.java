@@ -28,8 +28,8 @@ public class StalkingGame extends Table{
 	public StalkingGame(StalkerGame sg)
 	{
 		this.sg=sg;
-		//setBounds(0, 0, sg.WIDTH, sg.HEIGHT);
-		setBounds(0, 0, 800, 480);
+		setBounds(0, 0, sg.WIDTH, sg.HEIGHT);
+		//setBounds(0, 0, 800, 480);
 		setClip(true);
 		//sr = new Stalker(this);    //If you want to use any parameter or method of this class then use this initialization
 		sr = new Stalker(sg);		// it will pass through main game class instance to load texture in actor classes
